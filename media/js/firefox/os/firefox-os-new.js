@@ -158,8 +158,10 @@
 
             // setup GA event tracking on telecom provider exit links
             $('#provider-links a').each(function() {
-                $(this).attr({
-                    'data-element-location': $(this).text(), 
+                var $this = $(this);
+
+                $this.attr({
+                    'data-element-location': $this.text(),
                     'data-interaction': 'Get A Phone Exit'
                 });
             });

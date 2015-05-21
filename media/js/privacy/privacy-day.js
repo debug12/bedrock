@@ -8,7 +8,6 @@ $(function() {
     var pager = Mozilla.Pager.pagers[0];
     var $documentRoot = $(document);
     var $firstPager = $('.pager').first();
-    var href;
 
     // scroll to top of pager when switching tabs so all
     // tab content is visible after switching tabs

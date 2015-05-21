@@ -60,8 +60,10 @@
 
             // setup GA event tracking on telecom provider exit links
             $('#provider-links a').each(function() {
-                $(this).attr({
-                    'data-element-location': $(this).text(), 
+                var $this = $(this);
+
+                $this.attr({
+                    'data-element-location': $this.text(),
                     'data-interaction': 'Get A Phone Exit'
                 });
             });
@@ -135,7 +137,7 @@
                         'data-element-location': $this.data('lang'),
                         'data-interaciton': 'Indian Language Selection'
                     });
-                    
+
                 });
                 $document.on('click.lang-panel', function (e) {
                     var $target = $(e.target);
@@ -210,9 +212,11 @@
     }
 
     $('#useful-links').each(function() {
-        $(this).attr({
-            'data-interaction': 'click', 
-            'data-element-location': $(this).href
+        var $this = $(this);
+
+        $this.attr({
+            'data-interaction': 'click',
+            'data-element-location': $this.href
         });
     });
 

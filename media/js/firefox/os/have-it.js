@@ -453,7 +453,6 @@
             case 'photos-link':
                 slider.toSlide(1);
                 break;
-
             case 'music-link':
                 slider.toSlide(2);
                 break;

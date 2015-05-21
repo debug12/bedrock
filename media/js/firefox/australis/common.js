@@ -47,8 +47,14 @@
             $(this).attr({
                 'data-page-name': pageId,
                 'data-interaction': 'button click',
-                'data-element-location': 'Get Started with Sync',
-            }).on('click', Mozilla.UITour.showFirefoxAccounts);
+                'data-element-location': 'Get Started with Sync'
+            }).on('click', function() {
+                if (window.getFirefoxMasterVersion() >= 31) {
+                    Mozilla.UITour.showFirefoxAccounts();
+                } else {
+                    window.open(this.href, '_blank');
+                }
+            });
         });
     });
 
@@ -57,11 +63,10 @@
         $(this).attr({
             'data-page-name': pageId,
             'data-interaction': 'button click',
-            'data-element-location': 'Get Started with Sync',
-        }).on('click', function() {
+            'data-element-location': 'Get Started with Sync'
+        }).on('click', function(e) {
             e.preventDefault();
-            var url = this.href;
-            window.open(url, '_blank');
+            window.open(this.href, '_blank');
         });
     });
 
