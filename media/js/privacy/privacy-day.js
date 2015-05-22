@@ -32,7 +32,7 @@ $(function() {
     // Setup GA tracking for main tabs
     $('#tips-nav-direct a').on('click', function() {
         var thisTabName = $(this).attr('href');
-        console.log(thisTabName);
+
         window.dataLayer.push({
             event: 'privacy-interactions',
             browserAction: thisTabName.substr(1),

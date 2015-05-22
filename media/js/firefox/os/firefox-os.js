@@ -59,14 +59,7 @@
             $provider.show();
 
             // setup GA event tracking on telecom provider exit links
-            $('#provider-links a').each(function() {
-                var $this = $(this);
-
-                $this.attr({
-                    'data-element-location': $this.text(),
-                    'data-interaction': 'Get A Phone Exit'
-                });
-            });
+            $('#provider-links a').on('click', trackProviderExit);
 
             // persistent pencil icon is distracting/obtrusive on small screens
             if ($window.width() > 480) {
@@ -109,7 +102,6 @@
      */
     function toggleLangContentSelector () {
         clearTimeout(langTimer);
-        var href;
 
         if ($langPanel.hasClass('visible')) {
             $langPanel.removeClass('visible');
@@ -131,14 +123,6 @@
                 $langPanel.addClass('visible');
 
                 // hide panel when clicking outside in document
-                $('.lang-panel').each(function() {
-                    $this = $(this);
-                    $this.attr({
-                        'data-element-location': $this.data('lang'),
-                        'data-interaciton': 'Indian Language Selection'
-                    });
-
-                });
                 $document.on('click.lang-panel', function (e) {
                     var $target = $(e.target);
 
@@ -160,10 +144,12 @@
                                 sessionStorage.setItem(sessionLangPrefName, 'en-IN');
                             } catch (ex) {}
                         }
-                        href = $target.attr('href');
-                        if (language !== 'English') {
-                            window.location = href;
-                        }
+
+                        gaTrack(['_trackEvent', 'FxOs Consumer Page', 'Indian Language Selection', language], function() {
+                            if (language !== 'English') {
+                                window.location = $target.attr('href');
+                            }
+                        });
                     }
                 });
 
@@ -171,6 +157,21 @@
                 $window.on('scroll.lang-panel', toggleLangContentSelector);
             }, 50);
         }
+    }
+
+    /*
+    * Track telecom provider link clicks/page exits in Google Analytics
+    */
+    function trackProviderExit (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var href = this.href;
+
+        var callback = function () {
+            window.location = href;
+        };
+
+        trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'Get A Phone Exit', $this.text()], callback);
     }
 
     /*
@@ -211,13 +212,37 @@
         }
     }
 
-    $('#useful-links').each(function() {
-        var $this = $(this);
+    window.trackGAEvent = function (eventsArray, callback) {
+        if (!pause_ga_tracking) {
+            var timer = null;
+            var hasCallback = typeof(callback) == 'function';
+            var gaCallback = function () {
+                clearTimeout(timer);
+                callback();
+            };
 
-        $this.attr({
-            'data-interaction': 'click',
-            'data-element-location': $this.href
-        });
+            if (typeof(window._gaq) == 'object') {
+                if (hasCallback) {
+                    timer = setTimeout(gaCallback, 500);
+                    window._gaq.push(eventsArray, gaCallback);
+                } else {
+                    window._gaq.push(eventsArray);
+                }
+            } else if (hasCallback) {
+                callback();
+            }
+        }
+    };
+
+    $('#useful-links').on('click', 'a', function (e) {
+        e.preventDefault();
+        var that = this;
+        var callback = function () {
+            window.location = that.href;
+        };
+
+        //track GA event for useful links
+        trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'click', this.href], callback);
     });
 
     $script('//geo.mozilla.org/country.js', function() {

@@ -124,7 +124,10 @@
 
                 // link directly to Firefox Accounts when clicking the Sync CTA button
                 Mozilla.UITour.getConfiguration('sync', function() {
-                    $('.sync-cta').on('click', '.button', Mozilla.UITour.showFirefoxAccounts);
+                    $('.sync-cta').on('click', '.button', function(e) {
+                        e.preventDefault();
+                        Mozilla.UITour.showFirefoxAccounts();
+                    });
                 });
 
                 toggleDefaultContent(true);
@@ -171,7 +174,10 @@
                 toggleDefaultContent(false);
 
                 // wire up sync click in default content
-                $('.sync-cta').on('click', '.button', Mozilla.UITour.showFirefoxAccounts);
+                $('.sync-cta').on('click', '.button', function(e) {
+                    e.preventDefault();
+                    Mozilla.UITour.showFirefoxAccounts();
+                });
 
                 // id is used for Telemetry
                 var tour = new Mozilla.BrowserTour({

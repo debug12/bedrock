@@ -121,7 +121,10 @@ function onYouTubeIframeAPIReady() {
             $outerWrapper.hide();
 
             // wire up default content sync button
-            $('.sync-cta').on('click', '.button', Mozilla.UITour.showFirefoxAccounts);
+            $('.sync-cta').on('click', '.button', function(e) {
+                e.preventDefault();
+                Mozilla.UITour.showFirefoxAccounts();
+            });
 
             var suppressDoorhanger = Math.random() >= 0.5;
 

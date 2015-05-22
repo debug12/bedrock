@@ -233,11 +233,7 @@
     });
 
     //track GA event for newsletter CTA
-    window.dataLayer.push({
-      event: 'fxos-consumer',
-      interaction: 'click',
-      location: cta
-    });
+    trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'click', cta]);
   });
 
   $('#sign-up-form-close').on('click', function() {
@@ -260,11 +256,7 @@
     });
 
     //track GA event for get a phone CTA
-    window.dataLayer.push({
-      event: 'fxos-consumer',
-      interaction: 'click',
-      location: 'Get a Phone'
-    });
+    trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'click', 'Get a Phone']);
   });
 
   // toggle sticky masthead when tabzilla is opened/closed
@@ -375,11 +367,7 @@
   // tracks click even on nav link, and pauses scroll tracking momentarily
   function navClickGATrack(section_hash) {
     //track GA event for nav clicks
-    window.dataLayer.push({
-      event: 'fxos-consumer',
-      interaction: 'nav click',
-      location: section_hash
-    });
+    trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'nav click', section_hash]);
 
     // do not track while page is flying around
     pause_ga_tracking = true;
@@ -664,44 +652,40 @@
       e.preventDefault();
 
       //track GA event for monitoring if users are clicking on animated scroller
-      window.dataLayer.push({
-        event: 'fxos-consumer',
-        interaction: 'click',
-        location: 'Adaptive animated scroll arrows'
-      });
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'click', 'Adaptive animated scroll arrows']);
     });
   }
 
   function trackGAPageNoScroll () {
     $('#adapt1').waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'It adapts, so you can too'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'It adapts, so you can too']);
     });
     $('#adapt2').waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'Adaptive App Search'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'Adaptive App Search']);
     });
     $have_it_all.waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'Have it All'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'Have it All']);
     });
     $('#mission').waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'Transform the Future'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'Transform the Future']);
     });
   }
 
   function trackGAPageScroller () {
     $soccer_hook.waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'It adapts, so you can too'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'It adapts, so you can too']);
     });
     $cafe_hook.waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'Adaptive App Search (restaurant)'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'Adaptive App Search (restaurant)']);
     });
     $bday_hook.waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'Adaptive App Search (birthday)'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'Adaptive App Search (birthday)']);
     });
     $have_it_all.waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'Have it All'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'Have it All']);
     });
     $('#mission').waypoint(function () {
-      window.dataLayer.push({event: 'scroll-tracking', section: 'Transform the Future'});
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'scroll', 'Transform the Future']);
     });
   }
 
@@ -711,11 +695,7 @@
 
     $('#adapt-feature-sprite-plus').on(click_event, function(e) {
       e.preventDefault();
-      window.dataLayer.push({
-        event: 'consumer-page-interaction',
-        interaction: 'click',
-        location: 'Adaptive sprite plus'
-      });
+      trackGAEvent(['_trackEvent', 'FxOs Consumer Page', 'click', 'Adaptive sprite plus']);
     });
   }
 

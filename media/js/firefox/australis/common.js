@@ -48,7 +48,9 @@
                 'data-page-name': pageId,
                 'data-interaction': 'button click',
                 'data-element-location': 'Get Started with Sync'
-            }).on('click', function() {
+            }).on('click', function(e) {
+                e.preventDefault();
+
                 if (window.getFirefoxMasterVersion() >= 31) {
                     Mozilla.UITour.showFirefoxAccounts();
                 } else {
