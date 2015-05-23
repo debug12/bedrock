@@ -557,6 +557,14 @@ PIPELINE_CSS = {
         ),
         'output_filename': 'css/firefox_independent-bundle.css',
     },
+    'firefox-personal': {
+        'source_filenames': (
+            'css/sandstone/sandstone-resp.less',
+            'css/tabzilla/tabzilla-static.less',
+            'css/firefox/personal.less',
+        ),
+        'output_filename': 'css/firefox-personal-bundle.css',
+    },
     'installer_help': {
         'source_filenames': (
             'css/sandstone/sandstone-resp.less',
@@ -1349,6 +1357,12 @@ PIPELINE_JS = {
             'js/libs/matchMedia.addListener.js',
         ),
         'output_filename': 'js/firefox_hello_ie9-bundle.js',
+    },
+    'firefox-personal': {
+        'source_filenames': (
+            'js/firefox/personal.js',
+        ),
+        'output_filename': 'js/firefox-personal-bundle.js',
     },
     'firefox_tour': {
         'source_filenames': (
